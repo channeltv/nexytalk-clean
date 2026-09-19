@@ -78,7 +78,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     const user = await User.findOne({
-        \$or: [{ email: credenziale }, { username: credenziale }]
+        $or: [{ email: credenziale }, { username: credenziale }]
     });
 
     if (!user || user.password !== password) {
