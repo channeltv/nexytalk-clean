@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const User = require('./models/user.js');
+const User = require('./user.js');
 const Post = require('./models/Post.js');
 const Message = require('./models/Message.js');
 const Event = require('./models/Event.js');
