@@ -2,11 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const User = require('./models/user'); 
-const Post = require('./models/Post'); 
-const Message = require('./models/Message'); 
-const Event = require('./models/Event');
-
+const User = require('./models/user.js');
+const Post = require('./models/Post.js');
+const Message = require('./models/Message.js');
+const Event = require('./models/Event.js');
 const app = express();
 
 // 🔓 Abilitazione nativa e sicura dei permessi per NexyTalk
@@ -19,11 +18,9 @@ app.use((req, res, next) => {
     }
     next();
 });
-
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname)); 
-
 // Connessione protetta a MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('🟢 Connesso con successo a MongoDB Atlas online!'))
@@ -37,7 +34,6 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     }
 });
-
 // Funzione per inviare l'email di benvenuto NexyTalk
 async function inviaEmailConferma(emailUtente, nomeUtente) {
     const mailOptions = {
@@ -56,8 +52,7 @@ async function inviaEmailConferma(emailUtente, nomeUtente) {
                         Accedi a NexyTalk
                     </a>
                 </div>
-            </div>
-        `
+            </div>  `
     };
     try {
         await transporter.sendMail(mailOptions);
@@ -66,7 +61,6 @@ async function inviaEmailConferma(emailUtente, nomeUtente) {
         console.error("🔴 Errore invio email:", error);
     }
 }
-
 // Rotta di Login unica e semplificata
 app.post('/api/login', async (req, res) => {
   try {
